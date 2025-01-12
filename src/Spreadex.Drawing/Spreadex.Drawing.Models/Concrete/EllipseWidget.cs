@@ -2,7 +2,7 @@
 
 namespace Spreadex.Drawing.Models.Concrete;
 
-public class EllipseWidget: BaseWidget
+public class EllipseWidget : BaseWidget
 {
     public required int HorizontalDiameter { get; init; }
     public required int VerticalDiameter { get; init; }

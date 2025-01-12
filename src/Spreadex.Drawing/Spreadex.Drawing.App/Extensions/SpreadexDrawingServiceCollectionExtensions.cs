@@ -16,7 +16,7 @@ public static class SpreadexDrawingServiceCollectionExtensions
             .AddTransient<IWidgetFactory, WidgetFactory>()
             .AddTransient<IApp, Concrete.App>()
             .AddWidgetValidators();
-        
+
         return services;
-    }     
+    }
 }

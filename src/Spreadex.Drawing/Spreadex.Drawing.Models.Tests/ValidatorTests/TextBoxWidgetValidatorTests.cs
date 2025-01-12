@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using FluentValidation;
 using Spreadex.Drawing.Models.Concrete;
-using Spreadex.Drawing.Models.Validators.Concrete;
+using Spreadex.Drawing.Models.Validators;
 
 namespace Spreadex.Drawing.Models.Tests.ValidatorTests;
 

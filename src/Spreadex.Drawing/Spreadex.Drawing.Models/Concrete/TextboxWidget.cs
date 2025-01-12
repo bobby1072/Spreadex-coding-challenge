@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Spreadex.Drawing.Models.Concrete;
 
-public class TextboxWidget: BaseWidget
+public class TextboxWidget : BaseWidget
 {
     public required RectangleWidget BoundingRectangle { get; init; }
     public required string Text { get; init; }
+
     public override string GetDetails()
     {
         var stringBuilder = new StringBuilder();
@@ -16,7 +17,7 @@ public class TextboxWidget: BaseWidget
         stringBuilder.Append(BoundingRectangle.GetUniqueWidgetDetails());
         stringBuilder.Append(' ');
         stringBuilder.Append(WidgetUtils.WidgetPropertyToString(nameof(Text), Text));
-        
+
         return stringBuilder.ToString();
     }
 }

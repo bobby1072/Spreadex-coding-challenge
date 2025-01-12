@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Spreadex.Drawing.App.Services.Concrete;
 using Spreadex.Drawing.Models.Concrete;

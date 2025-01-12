@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Spreadex.Drawing.Models.Concrete;
-using Spreadex.Drawing.Models.Validators.Concrete;
+using Spreadex.Drawing.Models.Validators;
 
 namespace Spreadex.Drawing.Models.Extensions;
 
@@ -15,7 +15,7 @@ public static class SpreadexDrawingModelsServiceCollectionExtensions
             .AddSingleton<IValidator<EllipseWidget>, EllipseWidgetValidator>()
             .AddSingleton<IValidator<SquareWidget>, SquareWidgetValidator>()
             .AddSingleton<IValidator<TextboxWidget>, TextboxWidgetValidator>();
-        
+
         return services;
     }
 }

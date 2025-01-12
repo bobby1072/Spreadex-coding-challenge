@@ -6,32 +6,26 @@ using Spreadex.Drawing.Models.Concrete;
 
 namespace Spreadex.Drawing.App.Services.Concrete;
 
-public class WidgetFactory: IWidgetFactory
+public class WidgetFactory : IWidgetFactory
 {
     private readonly IServiceProvider _serviceProvider;
-    public WidgetFactory(
-        IServiceProvider serviceProvider
-    )
+
+    public WidgetFactory(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
 
     public IWidget CreateRectangle(int x, int y, int width, int height)
     {
-        
         var rect = new RectangleWidget
         {
-            Height = height, 
-            Location = new PageLocation
-            {
-                X = x,
-                Y = y
-            },
-            Width = width
+            Height = height,
+            Location = new PageLocation { X = x, Y = y },
+            Width = width,
         };
 
         _serviceProvider.GetService<IValidator<RectangleWidget>>()?.ValidateAndThrow(rect);
-        
+
         return rect;
     }
 
@@ -40,15 +34,11 @@ public class WidgetFactory: IWidgetFactory
         var circle = new CircleWidget
         {
             Diameter = diameter,
-            Location = new PageLocation
-            {
-                X = x,
-                Y = y
-            }
+            Location = new PageLocation { X = x, Y = y },
         };
-        
+
         _serviceProvider.GetService<IValidator<CircleWidget>>()?.ValidateAndThrow(circle);
-        
+
         return circle;
     }
 
@@ -56,15 +46,11 @@ public class WidgetFactory: IWidgetFactory
     {
         var ellipseWidget = new EllipseWidget
         {
-            Location = new PageLocation
-            {
-                X = x,
-                Y = y
-            },
+            Location = new PageLocation { X = x, Y = y },
             HorizontalDiameter = horizontalDiameter,
-            VerticalDiameter = verticalDiameter
+            VerticalDiameter = verticalDiameter,
         };
-        
+
         _serviceProvider.GetService<IValidator<EllipseWidget>>()?.ValidateAndThrow(ellipseWidget);
 
         return ellipseWidget;
@@ -74,15 +60,10 @@ public class WidgetFactory: IWidgetFactory
     {
         var square = new SquareWidget
         {
-            Location = new PageLocation
-            {
-                X = x,
-                Y = y
-
-            },
-            Width = width
+            Location = new PageLocation { X = x, Y = y },
+            Width = width,
         };
-        
+
         _serviceProvider.GetService<IValidator<SquareWidget>>()?.ValidateAndThrow(square);
 
         return square;
@@ -92,18 +73,13 @@ public class WidgetFactory: IWidgetFactory
     {
         var textBox = new TextboxWidget
         {
-            Location = new PageLocation
-            {
-                X = x,
-                Y = y
-            },
+            Location = new PageLocation { X = x, Y = y },
             Text = text,
             BoundingRectangle = rectangle,
-
         };
-        
+
         _serviceProvider.GetService<IValidator<TextboxWidget>>()?.ValidateAndThrow(textBox);
-        
+
         return textBox;
     }
 }

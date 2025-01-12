@@ -4,12 +4,10 @@ using Spreadex.Drawing.App.Extensions;
 
 var services = new ServiceCollection();
 
-services
-        .AddSpreadexDrawing();
+services.AddSpreadexDrawing();
 
 var serviceProvider = services.BuildServiceProvider();
 
 var app = serviceProvider.GetRequiredService<IApp>();
-
 
 app.Run();
