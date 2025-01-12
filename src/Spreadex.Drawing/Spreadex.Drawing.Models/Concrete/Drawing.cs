@@ -1,4 +1,5 @@
 ﻿using Spreadex.Drawing.Models.Abstract;
+using Spreadex.Drawing.Models.Extensions;
 
 namespace Spreadex.Drawing.Models.Concrete;
 
@@ -13,10 +14,18 @@ public class Drawing: IDrawing
 
     public void PrintDrawing()
     {
-        Console.WriteLine("Drawing:");
-        foreach (var widget in _widgets)
+        var widgetDetails = _widgets.ToWidgetDetailsList().ToArray();
+        var longestWidgetDetailsStringLength = widgetDetails.Select(x => x.Length).Max();
+        var longHyphenString = new string('-', longestWidgetDetailsStringLength + 5);
+        
+        Console.WriteLine(longHyphenString);
+        Console.WriteLine("Requested Drawing");
+        Console.WriteLine(longHyphenString);
+        
+        foreach (var predefinedWidget in widgetDetails)
         {
-            Console.WriteLine(widget.GetDetails());
-        }
+            Console.WriteLine(predefinedWidget);
+        };
+        Console.WriteLine(longHyphenString);
     }
 }

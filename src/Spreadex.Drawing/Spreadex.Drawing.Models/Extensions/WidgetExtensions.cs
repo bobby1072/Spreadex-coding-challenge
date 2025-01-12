@@ -17,5 +17,12 @@ internal static class WidgetExtensions
         return string.Join(" ", uniqueProperties);
     }
 
-    public static string GetWidgetTypeName<T>(this T widget) where T: IWidget => widget.GetType().Name;
+    public static string GetWidgetTypeName<T>(this T widget) where T: IWidget => widget.GetType().Name.Replace("Widget", "");
+    public static IEnumerable<string> ToWidgetDetailsList<T>(this IEnumerable<T> widgets) where T: IWidget
+    {
+        foreach (var widg in widgets)
+        {
+            yield return widg.GetDetails();
+        }
+    }
 }

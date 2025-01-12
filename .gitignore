@@ -4,3 +4,4 @@ bin/
 .vs/
 .config/
 .idea/
+*.sln.DotSettings.user
