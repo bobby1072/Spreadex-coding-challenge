@@ -12,13 +12,13 @@ internal static class WidgetExtensions
         var uniqueProperties = widgetType
             .GetProperties()
             .Where(x => widgetInterfaceProperties.All(y => y.Name != x.Name))
-            .Select(x => StringUtils.WidgetPropertyToString(x.Name, x.GetValue(widget)));
+            .Select(x => WidgetUtils.WidgetPropertyToString(x.Name, x.GetValue(widget)));
 
         return string.Join(" ", uniqueProperties);
     }
 
-    public static string GetWidgetTypeName<T>(this T widget) where T: IWidget => widget.GetType().Name.Replace("Widget", "");
-    public static IEnumerable<string> ToWidgetDetailsList<T>(this IEnumerable<T> widgets) where T: IWidget
+    public static string GetWidgetTypeName(this IWidget widget) => widget.GetType().Name.Replace("Widget", "");
+    public static IEnumerable<string> ToWidgetDetailsList(this IEnumerable<IWidget> widgets)
     {
         foreach (var widg in widgets)
         {

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreadex.Drawing.Models", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CF92B333-7AFA-4D5D-B4EA-FFDDE314262F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreadex.Drawing.Models.Tests", "Spreadex.Drawing.Models.Tests\Spreadex.Drawing.Models.Tests.csproj", "{209C6A8C-D437-46AD-B1B8-BB1B2ACF6A66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreadex.Drawing.App.Tests", "Spreadex.Drawing.App.Tests\Spreadex.Drawing.App.Tests.csproj", "{5D9784C0-414C-4875-B001-66F968980388}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +27,23 @@ Global
 		{D0627669-64F3-469E-928D-007E73F15761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0627669-64F3-469E-928D-007E73F15761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0627669-64F3-469E-928D-007E73F15761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209C6A8C-D437-46AD-B1B8-BB1B2ACF6A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209C6A8C-D437-46AD-B1B8-BB1B2ACF6A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209C6A8C-D437-46AD-B1B8-BB1B2ACF6A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209C6A8C-D437-46AD-B1B8-BB1B2ACF6A66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9784C0-414C-4875-B001-66F968980388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9784C0-414C-4875-B001-66F968980388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9784C0-414C-4875-B001-66F968980388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9784C0-414C-4875-B001-66F968980388}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28312340-F259-41A1-9616-8890D15C2EA2}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{209C6A8C-D437-46AD-B1B8-BB1B2ACF6A66} = {CF92B333-7AFA-4D5D-B4EA-FFDDE314262F}
+		{5D9784C0-414C-4875-B001-66F968980388} = {CF92B333-7AFA-4D5D-B4EA-FFDDE314262F}
 	EndGlobalSection
 EndGlobal

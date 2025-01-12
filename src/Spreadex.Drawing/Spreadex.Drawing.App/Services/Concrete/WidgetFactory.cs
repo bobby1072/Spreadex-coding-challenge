@@ -21,7 +21,8 @@ public class WidgetFactory: IWidgetFactory
         
         var rect = new RectangleWidget
         {
-            Height = height, Location = new PageLocation
+            Height = height, 
+            Location = new PageLocation
             {
                 X = x,
                 Y = y
