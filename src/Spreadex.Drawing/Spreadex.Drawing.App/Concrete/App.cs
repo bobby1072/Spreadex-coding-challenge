@@ -1,5 +1,4 @@
 ﻿using Spreadex.Drawing.App.Abstract;
-using Spreadex.Drawing.App.Extensions;
 using Spreadex.Drawing.App.Services.Abstract;
 using Spreadex.Drawing.Models.Abstract;
 using Spreadex.Drawing.Models.Concrete;

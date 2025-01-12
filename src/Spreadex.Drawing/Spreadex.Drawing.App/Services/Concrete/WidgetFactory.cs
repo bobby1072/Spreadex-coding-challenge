@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Spreadex.Drawing.App.Services.Abstract;
 using Spreadex.Drawing.Models.Abstract;
