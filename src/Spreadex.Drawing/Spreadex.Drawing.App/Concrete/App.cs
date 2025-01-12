@@ -1,5 +1,4 @@
 ﻿using Spreadex.Drawing.App.Abstract;
-using Spreadex.Drawing.App.Extensions;
 using Spreadex.Drawing.App.Services.Abstract;
 using Spreadex.Drawing.Models.Abstract;
 using Spreadex.Drawing.Models.Concrete;
@@ -25,19 +24,12 @@ public class App: IApp
             _widgetFactory.CreateCircle(1, 1, 300),
             _widgetFactory.CreateTextbox(5,5, "sample text", (RectangleWidget)_widgetFactory.CreateRectangle(5,5, 200, 100))
         ];
-        var widgetDetails = predefinedWidgetDetailsList.ToWidgetDetailsList().ToArray();
-        var longestWidgetDetailsStringLength = widgetDetails.Select(x => x.Length).Max();
-        var longHyphenString = new string('-', longestWidgetDetailsStringLength + 5);
-        
-        Console.WriteLine(longHyphenString);
-        Console.WriteLine("Requested Drawing");
-        Console.WriteLine(longHyphenString);
-        
-        foreach (var predefinedWidget in widgetDetails)
+        foreach (var widg in predefinedWidgetDetailsList)
         {
-            Console.WriteLine(predefinedWidget);
-        };
-        Console.WriteLine(longHyphenString);
+            _drawing.AddWidget(widg);
+        }
+        
+        _drawing.PrintDrawing();
     }
 
 

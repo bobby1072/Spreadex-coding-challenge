@@ -1,7 +1,4 @@
-﻿
-
-using System.Drawing;
-using Spreadex.Drawing.Models.Abstract;
+﻿using Spreadex.Drawing.Models.Abstract;
 using Spreadex.Drawing.Models.Concrete;
 
 namespace Spreadex.Drawing.App.Services.Abstract;
