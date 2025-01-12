@@ -12,7 +12,7 @@ internal static class WidgetExtensions
         var uniqueProperties = widgetType
             .GetProperties()
             .Where(x => widgetInterfaceProperties.All(y => y.Name != x.Name))
-            .Select(x => StringUtils.WidgetPropertyToString(x.Name, x.GetValue(widget)));
+            .Select(x => WidgetUtils.WidgetPropertyToString(x.Name, x.GetValue(widget)));
 
         return string.Join(" ", uniqueProperties);
     }

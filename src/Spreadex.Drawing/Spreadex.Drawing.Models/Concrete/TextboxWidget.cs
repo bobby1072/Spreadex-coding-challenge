@@ -15,7 +15,7 @@ public class TextboxWidget: BaseWidget
         stringBuilder.Append($"{TypeName} ({Location.X}, {Location.Y}) ");
         stringBuilder.Append(BoundingRectangle.GetUniqueWidgetDetails());
         stringBuilder.Append(' ');
-        stringBuilder.Append(StringUtils.WidgetPropertyToString(nameof(Text), Text));
+        stringBuilder.Append(WidgetUtils.WidgetPropertyToString(nameof(Text), Text));
         
         return stringBuilder.ToString();
     }
