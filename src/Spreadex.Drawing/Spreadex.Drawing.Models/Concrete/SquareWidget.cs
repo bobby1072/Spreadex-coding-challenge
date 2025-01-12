@@ -2,8 +2,7 @@
 
 namespace Spreadex.Drawing.Models.Concrete;
 
-public class RectangleWidget: BaseWidget
+public class SquareWidget: BaseWidget
 {
     public required int Width { get; init; }
-    public required int Height { get; init; }
 }
