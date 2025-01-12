@@ -1,33 +1,30 @@
 ﻿using System.Drawing;
 using AutoFixture;
 using FluentAssertions;
+using FluentValidation;
 using Spreadex.Drawing.Models.Concrete;
 using Spreadex.Drawing.Models.Validators.Concrete;
 
 namespace Spreadex.Drawing.Models.Tests.ValidatorTests;
 
-public class SquareWidgetValidatorTests
+public class SquareWidgetValidatorTests: ValidatorTestBase<SquareWidget>
 {
-    private static readonly Fixture _fixture = new();
-    private readonly SquareWidgetValidator _squareWidgetValidator;
+    protected override IValidator<SquareWidget> Validator { get; init; }
 
     public SquareWidgetValidatorTests()
     {
-        _squareWidgetValidator = new SquareWidgetValidator();
+        Validator = new SquareWidgetValidator();
     }
 
     [Theory]
     [ClassData(typeof(SquareWidgetValidatorTests_ClassData))]
-    public void TestSquareWidgetValidator(SquareWidget squareWidget, bool expectedResult)
-    {
-        _squareWidgetValidator.Validate(squareWidget).IsValid.Should().Be(expectedResult);
-    }
-    public class SquareWidgetValidatorTests_ClassData: TheoryData<SquareWidget, bool>
+    public void SquareWidgetValidator_ShouldValidateCorrectly(SquareWidget squareWidget, bool expectedResult) => RunTest(squareWidget, expectedResult);
+    private class SquareWidgetValidatorTests_ClassData: TheoryData<SquareWidget, bool>
     {
         public SquareWidgetValidatorTests_ClassData()
         {
             Add(
-                _fixture
+                Fixture
                     .Build<SquareWidget>()
                     .With(x => x.Width, 100)
                     .Create(), 
@@ -35,7 +32,7 @@ public class SquareWidgetValidatorTests
             );
             
             Add(
-                _fixture
+                Fixture
                     .Build<SquareWidget>()
                     .With(x => x.Width, -100)
                     .Create(), 
@@ -43,7 +40,7 @@ public class SquareWidgetValidatorTests
             );
             
             Add(
-                _fixture
+                Fixture
                     .Build<SquareWidget>()
                     .With(x => x.Width, 1)
                     .Create(), 
@@ -51,7 +48,7 @@ public class SquareWidgetValidatorTests
             );
             
             Add(
-                _fixture
+                Fixture
                     .Build<SquareWidget>()
                     .With(x => x.Width, 0)
                     .Create(), 
@@ -59,7 +56,7 @@ public class SquareWidgetValidatorTests
             );
             
             Add(
-                _fixture
+                Fixture
                     .Build<SquareWidget>()
                     .With(x => x.Width, -1)
                     .Create(), 
