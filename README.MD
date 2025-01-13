@@ -16,4 +16,6 @@ By using FluentValidation, I separated validation from the core business logic, 
 
 ## Improvements
 
+###
+
 I think If I were to have more time. I would make improvements to the WidgetFactory to make it less tied to individual widget implementations and make more use of abstractions. For example, I could introduce a more generic creation mechanism that relies on a dictionary or registry of widget types and their corresponding validators, allowing the factory to dynamically resolve and create widgets based on input parameters. This would reduce the need for hardcoding each widget type in the factory and make it easier to add new widget types without modifying the factory class. Additionally, I could explore using a configuration-based approach or a more robust dependency injection strategy to further decouple widget creation from specific implementations, improving scalability and maintainability.
