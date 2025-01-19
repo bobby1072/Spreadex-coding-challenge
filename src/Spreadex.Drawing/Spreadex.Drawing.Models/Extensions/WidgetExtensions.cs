@@ -10,7 +10,7 @@ internal static class WidgetExtensions
         typeof(IWidget).GetProperties();
 
     public static string GetUniqueWidgetDetails<T>(this T widget)
-        where T : IWidget
+        where T : class, IWidget
     {
         var widgetType = widget.GetType();
         var uniqueProperties = widgetType
@@ -23,7 +23,7 @@ internal static class WidgetExtensions
     }
 
     public static string GetWidgetTypeName<T>(this T widget)
-        where T : IWidget => widget.GetType().Name.Replace("Widget", "");
+        where T : class, IWidget => widget.GetType().Name.Replace("Widget", "");
 
     public static IEnumerable<string> ToWidgetDetailsList(this IEnumerable<IWidget> widgets)
     {
