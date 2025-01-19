@@ -7,52 +7,7 @@ using Spreadex.Drawing.Models.Concrete;
 
 namespace Spreadex.Drawing.App.Services.Concrete;
 
-public class WidgetFactoryV2
-{
-    private readonly IServiceProvider _serviceProvider;
-
-    public WidgetFactoryV2(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
-    public T CreateWidget<T>(IDictionary<string, object> propertyArgs) where T : class, IWidget
-    {
-        var widgetType = typeof(T);
-        var widget = Activator.CreateInstance(widgetType) as T;
-        if (widget == null)
-        {
-            throw new InvalidOperationException($"Could not create an instance of type {widgetType.Name}.");
-        }
-
-        foreach (var property in propertyArgs)
-        {
-            var propertyInfo = widgetType.GetProperty(property.Key, BindingFlags.Public | BindingFlags.Instance);
-            if (propertyInfo == null)
-            {
-                throw new ArgumentException($"Property {property.Key} does not exist on type {widgetType.Name}.");
-            }
-
-            if (!propertyInfo.CanWrite)
-            {
-                throw new ArgumentException($"Property {property.Key} on type {widgetType.Name} is read-only.");
-            }
-
-            if (property.Value != null && !propertyInfo.PropertyType.IsInstanceOfType(property.Value))
-            {
-                throw new ArgumentException($"Invalid type for property {property.Key}. Expected {propertyInfo.PropertyType.Name} but got {property.Value.GetType().Name}.");
-            }
-
-            propertyInfo.SetValue(widget, property.Value);
-        }
-
-        var validator = _serviceProvider.GetService<IValidator<T>>();
-        validator?.ValidateAndThrow(widget);
-
-        return widget;
-    }
-}
-public class WidgetFactory : IWidgetFactory
+public class WidgetFactory: IWidgetFactory
 {
     private readonly IServiceProvider _serviceProvider;
 
@@ -61,71 +16,44 @@ public class WidgetFactory : IWidgetFactory
         _serviceProvider = serviceProvider;
     }
 
-    public IWidget CreateRectangle(int x, int y, int width, int height)
+    public T CreateWidget<T>(PageLocation location, params (string Key, object Value)[] propertyArgs) where T : class, IWidget
     {
-        var rect = new RectangleWidget
+        var widgetType = typeof(T);
+        var widget = Activator.CreateInstance(widgetType) as T;
+        if (widget is null)
         {
-            Height = height,
-            Location = new PageLocation { X = x, Y = y },
-            Width = width,
-        };
+            throw new InvalidOperationException($"Could not create an instance of type {widgetType.Name}");
+        }
 
-        _serviceProvider.GetService<IValidator<RectangleWidget>>()?.ValidateAndThrow(rect);
-
-        return rect;
-    }
-
-    public IWidget CreateCircle(int x, int y, int diameter)
-    {
-        var circle = new CircleWidget
+        foreach (var property in propertyArgs)
         {
-            Diameter = diameter,
-            Location = new PageLocation { X = x, Y = y },
-        };
+            var propertyInfo = widgetType.GetProperty(property.Key, BindingFlags.Public | BindingFlags.Instance);
+            if (propertyInfo is null)
+            {
+                throw new ArgumentException($"Property {property.Key} does not exist on type {widgetType.Name}");
+            }
 
-        _serviceProvider.GetService<IValidator<CircleWidget>>()?.ValidateAndThrow(circle);
+            if (!propertyInfo.CanWrite)
+            {
+                throw new ArgumentException($"Property {property.Key} on type {widgetType.Name} is read-only");
+            }
 
-        return circle;
-    }
+            if (property.Value is not null && !propertyInfo.PropertyType.IsInstanceOfType(property.Value))
+            {
+                throw new ArgumentException($"Invalid type for property {property.Key}. Expected {propertyInfo.PropertyType.Name} but got {property.Value.GetType().Name}");
+            }
 
-    public IWidget CreateEllipse(int x, int y, int horizontalDiameter, int verticalDiameter)
-    {
-        var ellipseWidget = new EllipseWidget
+            propertyInfo.SetValue(widget, property.Value);
+        }
+        var locationPropertyInfo = widgetType.GetProperty(nameof(IWidget.Location), BindingFlags.Public | BindingFlags.Instance);
+        if (locationPropertyInfo is null)
         {
-            Location = new PageLocation { X = x, Y = y },
-            HorizontalDiameter = horizontalDiameter,
-            VerticalDiameter = verticalDiameter,
-        };
+            throw new ArgumentException($"Property {nameof(IWidget.Location)} does not exist on type {widgetType.Name}");
+        }
+        locationPropertyInfo.SetValue(widget, location);
+        var validator = _serviceProvider.GetService<IValidator<T>>();
+        validator?.ValidateAndThrow(widget);
 
-        _serviceProvider.GetService<IValidator<EllipseWidget>>()?.ValidateAndThrow(ellipseWidget);
-
-        return ellipseWidget;
-    }
-
-    public IWidget CreateSquare(int x, int y, int width)
-    {
-        var square = new SquareWidget
-        {
-            Location = new PageLocation { X = x, Y = y },
-            Width = width,
-        };
-
-        _serviceProvider.GetService<IValidator<SquareWidget>>()?.ValidateAndThrow(square);
-
-        return square;
-    }
-
-    public IWidget CreateTextbox(int x, int y, string text, RectangleWidget rectangle)
-    {
-        var textBox = new TextboxWidget
-        {
-            Location = new PageLocation { X = x, Y = y },
-            Text = text,
-            BoundingRectangle = rectangle,
-        };
-
-        _serviceProvider.GetService<IValidator<TextboxWidget>>()?.ValidateAndThrow(textBox);
-
-        return textBox;
+        return widget;
     }
 }
